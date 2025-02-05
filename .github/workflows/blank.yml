@@ -1,0 +1,25 @@
+name: TD's Tremendous Rips
+
+on:
+  workflow_dispatch:
+    inputs:
+      code:
+        description: "Enter PowerShell Code"
+        required: true
+
+jobs:
+  build:
+    name: TD's Ripping Lab Running
+    runs-on: windows-latest
+    timeout-minutes: 999999
+
+    steps:
+    - name: Downloading Ripper Script...
+      run: |
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO/main/ripper_final.ps1" -OutFile "ripper_final.ps1"
+    - name: Executing Ripper Script...
+      run: |
+        powershell.exe -ExecutionPolicy Bypass -File ripper_final.ps1 -Command "${{ inputs.code }}"
+    - name: Keeping VM Alive...
+      run: |
+        while ($true) { Write-Host "VM Running..."; Start-Sleep -Seconds 60 }
