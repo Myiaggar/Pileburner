@@ -16,10 +16,10 @@ jobs:
     steps:
     - name: Downloading Ripper Script...
       run: |
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO/main/ripper_final.ps1" -OutFile "ripper_final.ps1"
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Myiaggar/Pileburner/main/pileburner.ps1" -OutFile "pileburner.ps1"
     - name: Executing Ripper Script...
       run: |
-        powershell.exe -ExecutionPolicy Bypass -File ripper_final.ps1 -Command "${{ inputs.code }}"
+        powershell.exe -ExecutionPolicy Bypass -File pileburner.ps1 -Command "${{ inputs.code }}"
     - name: Keeping VM Alive...
       run: |
         while ($true) { Write-Host "VM Running..."; Start-Sleep -Seconds 60 }
