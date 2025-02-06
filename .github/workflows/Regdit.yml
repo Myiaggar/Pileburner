@@ -15,7 +15,8 @@ jobs:
 
     steps:
     - name: Set PowerShell Code
-      run: echo "INPUT_CODE=${{ inputs.code }}" | Out-File -FilePath $GITHUB_ENV -Encoding utf8
+      shell: bash
+      run: echo "INPUT_CODE=${{ inputs.code }}" >> $GITHUB_ENV
 
     - name: Downloading Pileburner Script...
       run: |
