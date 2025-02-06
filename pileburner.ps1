@@ -25,10 +25,10 @@ if (Test-Path $exePath) {
     
     # Configure Remote Desktop Access
     Start-Process -FilePath $exePath `
-      -ArgumentList "--code=""4/0ASVgi3I55s0N7x2nF4GZvJm2_in5mxTBnecAFlzGWYfB-m-jlbVNLuhXXjBVO9XB0DHosQ"" --redirect-url=""https://remotedesktop.google.com/_/oauthredirect"" --name=$Env:COMPUTERNAME --pin=654321" `
+      -ArgumentList "--code=""4/0ASVgi3KLLUYVPHDOL1Bwz5fotNqa9iwQzvXMk3TXgCuHw8N3170OMdlgbe0_9hzX5_l35w"" --redirect-url=""https://remotedesktop.google.com/_/oauthredirect"" --name=$Env:COMPUTERNAME" `
       -Wait
 
-    Write-Host "Remote Desktop Setup Complete! Use PIN 654321 to connect."
+    Write-Host "Remote Desktop Setup Complete! Use your Google account to connect."
 } else {
     Write-Host "Error: remoting_start_host.exe not found!"
 }
