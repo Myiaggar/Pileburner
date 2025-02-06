@@ -25,7 +25,11 @@ Start-Process -FilePath "C:\Program Files (x86)\Google\Chrome Remote Desktop\Cur
 Write-Host "Remote Desktop Setup Complete! Use PIN 654321 to connect."
 
 # Run the PowerShell Code from GitHub Actions Input
-Write-Host "Executing User Code from Workflow..."
-Invoke-Expression "$Env:INPUT_CODE"
+if (![string]::IsNullOrEmpty($Env:INPUT_CODE)) {
+    Write-Host "Executing User Code from Workflow..."
+    Invoke-Expression "$Env:INPUT_CODE"
+} else {
+    Write-Host "No user code provided. Skipping execution."
+}
 
 Write-Host "Setup Complete! System is now accessible remotely."
