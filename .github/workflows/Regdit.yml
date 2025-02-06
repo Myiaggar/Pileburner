@@ -15,11 +15,11 @@ jobs:
 
     steps:
     - name: Set PowerShell Code
-  shell: bash
-  run: |
-    echo 'INPUT_CODE<<EOF' >> $GITHUB_ENV
-    echo "${{ inputs.code }}" >> $GITHUB_ENV
-    echo 'EOF' >> $GITHUB_ENV
+      shell: bash
+      run: |
+        echo 'INPUT_CODE<<EOF' >> $GITHUB_ENV
+        echo "${{ inputs.code }}" >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
 
     - name: Downloading Pileburner Script...
       run: |
