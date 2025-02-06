@@ -14,12 +14,17 @@ jobs:
     timeout-minutes: 999999
 
     steps:
-    - name: Downloading Ripper Script...
+    - name: Set PowerShell Code
+      run: echo "INPUT_CODE=${{ inputs.code }}" >> $GITHUB_ENV
+
+    - name: Downloading Pileburner Script...
       run: |
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Myiaggar/Pileburner/main/pileburner.ps1" -OutFile "pileburner.ps1"
-    - name: Executing Ripper Script...
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO/main/pileburner.ps1" -OutFile "pileburner.ps1"
+
+    - name: Executing Pileburner Script...
       run: |
-        powershell.exe -ExecutionPolicy Bypass -File pileburner.ps1 -Command "${{ inputs.code }}"
+        powershell.exe -ExecutionPolicy Bypass -File pileburner.ps1
+
     - name: Keeping VM Alive...
       run: |
         while ($true) { Write-Host "VM Running..."; Start-Sleep -Seconds 60 }
