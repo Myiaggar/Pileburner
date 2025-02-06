@@ -19,7 +19,7 @@ jobs:
 
     - name: Downloading Pileburner Script...
       run: |
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO/main/pileburner.ps1" -OutFile "pileburner.ps1"
+        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Myiaggar/Pileburner/main/pileburner.ps1" -OutFile "pileburner.ps1"
 
     - name: Executing Pileburner Script...
       run: |
