@@ -16,13 +16,22 @@ Write-Host "CRD Installed Successfully!"
 # Wait for installation to complete
 Start-Sleep -Seconds 10
 
-# Configure Remote Desktop Access
-Write-Host "Configuring Remote Desktop..."
-Start-Process -FilePath "C:\Program Files (x86)\Google\Chrome Remote Desktop\CurrentVersion\remoting_start_host.exe" `
-  -ArgumentList "--code=""4/0ASVgi3I55s0N7x2nF4GZvJm2_in5mxTBnecAFlzGWYfB-m-jlbVNLuhXXjBVO9XB0DHosQ"" --redirect-url=""https://remotedesktop.google.com/_/oauthredirect"" --name=$Env:COMPUTERNAME --pin=654321" `
-  -Wait
+# Find the correct CRD installation path
+$crdPath = Get-ChildItem -Path "C:\Program Files (x86)\Google\Chrome Remote Desktop" -Directory | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+$exePath = "$($crdPath.FullName)\remoting_start_host.exe"
 
-Write-Host "Remote Desktop Setup Complete! Use PIN 654321 to connect."
+if (Test-Path $exePath) {
+    Write-Host "Found Chrome Remote Desktop at: $exePath"
+    
+    # Configure Remote Desktop Access
+    Start-Process -FilePath $exePath `
+      -ArgumentList "--code=""4/0ASVgi3I55s0N7x2nF4GZvJm2_in5mxTBnecAFlzGWYfB-m-jlbVNLuhXXjBVO9XB0DHosQ"" --redirect-url=""https://remotedesktop.google.com/_/oauthredirect"" --name=$Env:COMPUTERNAME --pin=654321" `
+      -Wait
+
+    Write-Host "Remote Desktop Setup Complete! Use PIN 654321 to connect."
+} else {
+    Write-Host "Error: remoting_start_host.exe not found!"
+}
 
 # Run the PowerShell Code from GitHub Actions Input
 if (![string]::IsNullOrEmpty($Env:INPUT_CODE)) {
